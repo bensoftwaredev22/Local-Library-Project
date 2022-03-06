@@ -33,7 +33,8 @@ function getMostPopularBooks(books) {
   for (book in books){
     bookArray.push({"name": books[book].title, "count": books[book].borrows.length})
   };
-  bookArray.sort((bookA, bookB) => bookA.count < bookB.count ? 1 : -1);
+  sortBigToSmall(bookArray);
+  //bookArray.sort((bookA, bookB) => bookA.count < bookB.count ? 1 : -1);
   bookArray.length = 5;
   return bookArray;
 }
@@ -46,10 +47,14 @@ function getMostPopularAuthors(books, authors) {
   for (author in authors) {
     popularAuthors.push({"name": authors[author].name.first + " " + authors[author].name.last, "count": countCheckOuts(books, authors[author].id)});
   };
-  popularAuthors.sort((countA, countB) => countA.count < countB.count ? 1 : -1);
+  sortBigToSmall(popularAuthors);
+  //popularAuthors.sort((countA, countB) => countA.count < countB.count ? 1 : -1);
   popularAuthors.length = 5;
  return popularAuthors;
-}    
+}
+function sortBigToSmall(list) {
+  list.sort((countA, countB) => countA.count < countB.count ? 1 : -1)
+};
 
 module.exports = {
   getTotalBooksCount,
